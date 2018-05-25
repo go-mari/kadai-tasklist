@@ -30,15 +30,17 @@ class UsersController < ApplicationController
   
   private
   
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-  
   def correct_user
-    @task = current_user.tasks.find_by(id: params[:id])
-    unless @task
+    # @task = current_user.tasks.find_by(id: params[:id])
+    # unless @task    
+    unless @user == current_user
       redirect_to root_url
     end
+  end
+  
+  # strong Parameter
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end
 
